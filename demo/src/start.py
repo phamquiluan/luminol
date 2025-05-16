@@ -34,7 +34,7 @@ def get_selection():
 
 @app.route('/detect')
 def luminoldetect():
-  ts = urllib.unquote(request.args.get('ts_path')[1:])
+  ts = urllib.parse.unquote(request.args.get('ts_path')[1:])
   my_detector = anomaly_detector.AnomalyDetector(ts)
   score = my_detector.get_all_scores().values
 
@@ -58,7 +58,7 @@ def luminoldetect():
 
 @app.route('/correlate')
 def luminolanalyze():
-  ts = urllib.unquote(request.args.get('ts_paths'))
+  ts = urllib.parse.unquote(request.args.get('ts_paths'))
   ts = ts.split(",")
   matrix = ts.pop(0)
   matrices = list()
@@ -71,7 +71,7 @@ def luminolanalyze():
 
 @app.route('/find_correlation_list')
 def findCorrelationListPerAnomaly():
-  ts = urllib.unquote(request.args.get('ts')[1:])
+  ts = urllib.parse.unquote(request.args.get('ts')[1:])
   all_ts = os.listdir(DATA_PATH)
   matrices = list()
   for t in all_ts:
